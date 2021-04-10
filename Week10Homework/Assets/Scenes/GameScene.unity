@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377509985}
   - component: {fileID: 377509986}
+  - component: {fileID: 377509987}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -169,6 +170,19 @@ MonoBehaviour:
   greenTile: {fileID: 6723010100079104841, guid: f71a68ae06859f9428ab2dd1668a30f3,
     type: 3}
   cam: {fileID: 1301626250}
+  level: {fileID: 0}
+--- !u!114 &377509987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377509984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3ca5ce368e86b46bef70b366724dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1301626248
 GameObject:
   m_ObjectHideFlags: 0

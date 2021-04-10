@@ -61,7 +61,7 @@ public class Array2D : MonoBehaviour
         }
     }
 
-    void MakeGrid()
+    public void MakeGrid()
     {
         if (level != null)
         {
