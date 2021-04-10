@@ -168,6 +168,7 @@ MonoBehaviour:
   width: 12
   greenTile: {fileID: 8016310628586143882, guid: 7f0442769b3316340b0029e2e5aa7cdc,
     type: 3}
+  cam: {fileID: 1301626250}
 --- !u!1 &1301626248
 GameObject:
   m_ObjectHideFlags: 0

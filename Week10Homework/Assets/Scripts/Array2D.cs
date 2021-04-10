@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Array2D : MonoBehaviour
 {
-    
     //This script is to generate the grid
     //top left corner is -8.88, 4.92, for offset
 
@@ -24,10 +24,38 @@ public class Array2D : MonoBehaviour
     private float offsetX = -8.2f;
     private float offsetY = -4;
     private float padding = 0.5f;
+
+    //the main scene camera
+    public Camera cam;
     
     void Start()
     {
+        //Since we need random tile layouts in this game, this is the random seed
+        //It is very unlikely you'd 
+        Random.InitState(System.DateTime.Now.Second * System.DateTime.Now.Millisecond);
         MakeGrid();
+    }
+
+    private void Update()
+    {
+        //when you click the mouse, we want to see what we've hit
+        if (Input.GetMouseButtonDown(0))
+        {
+            //we get the mouse position in worldspace so we know the point at which we clicked
+            var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            
+            //then we raycast at that point
+            RaycastHit2D hit = Physics2D.Raycast(
+                mousePos, 
+                Vector2.zero);
+
+            //if we hit a collider, AND that collider was a tile object, we want to execute the 'tile clicked' function
+            if (hit.collider != null && hit.collider.gameObject.tag == "Tile")
+            {
+                //for this to work, each tile prefab needs a box collider
+                TileClicked();
+            }
+        }
     }
 
     void MakeGrid()
@@ -65,6 +93,11 @@ public class Array2D : MonoBehaviour
                 tilesAtPos[x, y] = newTile;
             }
         }
+    }
+
+    void TileClicked()
+    {
+        Debug.Log("Tile clicked");
     }
     
 }
