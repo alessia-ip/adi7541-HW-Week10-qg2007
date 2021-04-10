@@ -52,8 +52,8 @@ public class Array2D : MonoBehaviour
             //if we hit a collider, AND that collider was a tile object, we want to execute the 'tile clicked' function
             if (hit.collider != null && hit.collider.gameObject.tag == "Tile")
             {
-                //for this to work, each tile prefab needs a box collider
-                TileClicked();
+                var selected = hit.collider.gameObject;
+                TileClicked(selected);
             }
         }
     }
@@ -95,9 +95,13 @@ public class Array2D : MonoBehaviour
         }
     }
 
-    void TileClicked()
+    void TileClicked(GameObject tile)
     {
-        Debug.Log("Tile clicked");
+        
+        var resourceType = tile.GetComponent<TileInformation>().resourceType;
+        
+        Debug.Log(resourceType.ToString());
+        
     }
     
 }
