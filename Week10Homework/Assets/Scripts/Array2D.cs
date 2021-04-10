@@ -27,6 +27,9 @@ public class Array2D : MonoBehaviour
 
     //the main scene camera
     public Camera cam;
+
+    
+    public GameObject level;
     
     void Start()
     {
@@ -59,7 +62,14 @@ public class Array2D : MonoBehaviour
     }
 
     void MakeGrid()
-    { 
+    {
+        if (level != null)
+        {
+            Destroy(level);
+        }
+
+        level = new GameObject("Level");
+        
         //set grid positions
         tilePlaces = new Vector2[width, height];
         for (int x = 0; x < width; x++)
@@ -79,6 +89,7 @@ public class Array2D : MonoBehaviour
         }
         
         //put tiles at positions defined above
+        //TODO add random tile types
         tilesAtPos = new GameObject[width, height];
         for (int x = 0; x < width; x++)
         {
@@ -89,6 +100,7 @@ public class Array2D : MonoBehaviour
                 var newTile = Instantiate(greenTile);
                 //we move the tile to the correct position
                 newTile.transform.position = tilePlaces[x, y];
+                newTile.transform.parent = level.transform;
                 //then we assign it to our tiles 2D array
                 tilesAtPos[x, y] = newTile;
             }
