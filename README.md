@@ -13,5 +13,7 @@
 
 ### Work Breakdown
 1 & 3 -> Joy
+
 2 & 5 -> Yanxi
+
 4 & 6 ->  Alessia
