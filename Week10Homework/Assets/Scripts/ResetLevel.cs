@@ -12,7 +12,6 @@ public class ResetLevel : MonoBehaviour
         _array2D = this.gameObject.GetComponent<Array2D>();
     }
 
-
     void ResetButton()
     {
         _array2D.MakeGrid();
