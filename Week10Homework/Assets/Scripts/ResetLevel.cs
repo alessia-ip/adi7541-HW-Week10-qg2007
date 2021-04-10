@@ -9,7 +9,7 @@ public class ResetLevel : MonoBehaviour
     
     private void Start()
     {
-        _array2D = this.gameObject.GetComponent<Array2D>();
+        _array2D = GameObject.FindWithTag("Game Manager").GetComponent<Array2D>();
     }
 
     void ResetButton()
