@@ -218,7 +218,7 @@ public class Array2D : MonoBehaviour
                 {
                     for (var y = y2 + 1; y < y1; y++)
                     {
-                        if (tilesAtPos[x1, y] = null)
+                        if (tilesAtPos[x1, y] == null)
                         {
                             pathworks = true;
                         }
@@ -230,7 +230,7 @@ public class Array2D : MonoBehaviour
                 {
                     for (var y = y1 + 1; y < y2; y++)
                     {
-                        if (tilesAtPos[x1, y] = null)
+                        if (tilesAtPos[x1, y] == null)
                         {
                             pathworks = true;
                         }
@@ -249,7 +249,7 @@ public class Array2D : MonoBehaviour
                 {
                     for (var x = x2 + 1; x < y1; x++)
                     {
-                        if (tilesAtPos[x, y1] = null)
+                        if (tilesAtPos[x, y1] == null)
                         {
                             pathworks = true;
                         }
@@ -261,7 +261,7 @@ public class Array2D : MonoBehaviour
                 {
                     for (var x = x1 + 1; x < x2; x++)
                     {
-                        if (tilesAtPos[x, y1] = null)
+                        if (tilesAtPos[x, y1] == null)
                         {
                             pathworks = true;
                         }
