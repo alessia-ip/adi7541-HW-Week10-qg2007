@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class TileInformation : MonoBehaviour
@@ -15,5 +16,8 @@ public class TileInformation : MonoBehaviour
     }
 
     public TileResource resourceType;
+
+    public int indexX;
+    public int indexY;
 
 }

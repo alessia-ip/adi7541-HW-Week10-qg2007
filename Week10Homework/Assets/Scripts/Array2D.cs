@@ -39,8 +39,8 @@ public class Array2D : MonoBehaviour
     
     // 
     private int selectCount = 0;
-    private GameObject selected1 = null;
-    private GameObject selected2 = null;
+    public GameObject selected1 = null;
+    public GameObject selected2 = null;
 
     public GameObject level;
 
@@ -137,6 +137,9 @@ public class Array2D : MonoBehaviour
                 //we move the tile to the correct position
                 newTile.transform.position = tilePlaces[x, y];
                 newTile.transform.parent = level.transform;
+                //We have each tile keep track of it's position in the array
+                newTile.GetComponent<TileInformation>().indexX = x;
+                newTile.GetComponent<TileInformation>().indexY = y;
                 //then we assign it to our tiles 2D array
                 tilesAtPos[x, y] = newTile;
                 
@@ -149,8 +152,7 @@ public class Array2D : MonoBehaviour
         
         var resourceType1 = tile1.GetComponent<TileInformation>().resourceType;
         var resourceType2 = tile2.GetComponent<TileInformation>().resourceType;
-        Debug.Log("selected1"+resourceType1.ToString());
-        Debug.Log("selected2"+resourceType2.ToString());
+
     }
     
     void StartRandomTile()
@@ -185,112 +187,117 @@ public class Array2D : MonoBehaviour
         var resourceType2 = tile2.GetComponent<TileInformation>().resourceType;
         if (resourceType1 == resourceType2)
         {
-            Debug.Log("sametype=" + resourceType2.ToString());
             LocationIn2dArray(selected1,selected2);
         }
     }
 
     void LocationIn2dArray(GameObject tile1, GameObject tile2)
     {
-        var location1x = tile1.GetComponent<TileInformation>().transform.position.x;
-        var location1y = tile1.GetComponent<TileInformation>().transform.position.y;
-        int xin2darray1 = Convert.ToInt32((location1x + 8.2) / 1.5);
-        int yin2darray1 = Convert.ToInt32((location1y - 3.5)*(-1) / 1.5);
-        var location2x = tile2.GetComponent<TileInformation>().transform.position.x;
-        var location2y = tile2.GetComponent<TileInformation>().transform.position.y;
-        int xin2darray2 = Convert.ToInt32((location2x + 8.2) / 1.5);
-        int yin2darray2 = Convert.ToInt32((location2y - 3.5)*(-1) / 1.5);
+        int xin2darray1 = tile1.GetComponent<TileInformation>().indexX;
+        int yin2darray1 = tile1.GetComponent<TileInformation>().indexY;
+        int xin2darray2 = tile2.GetComponent<TileInformation>().indexX;
+        int yin2darray2 = tile2.GetComponent<TileInformation>().indexY;
+        
+        Debug.Log("Tile one is at: " + xin2darray1  + "," + yin2darray1+"\n Tile two is at: " + xin2darray2 + "," + yin2darray2);
+        
         CheckPath(xin2darray1,yin2darray1,xin2darray2,yin2darray2);
     }
 
     void CheckPath(int x1, int y1, int x2, int y2)
     {
-        bool pathworks = false;
-        if (x1 == x2)
-        {
-            Debug.Log("samex");
-            if (y1 - y2 == 1 || y1 - y2 == -1)
+        //is this a valid path or not?
+            //so far only works for a straight line
+            bool pathworks = false;
+            
+            //if x1 and x2 are the same, we know they line up on one axis
+            if (x1 == x2)
             {
-                pathworks = true;
-            }
-            else if (y1 - y2 > 1)
-            {
+                Debug.Log("sameX");
+                
+                //if the tiles are right next to each other, we know the path is valid because they're touching
+                if (y1 - y2 == 1 || y1 - y2 == -1)
                 {
-                    for (var y = y2 + 1; y < y1; y++)
-                    {
-                        if (tilesAtPos[x1, y] == null)
-                        {
-                            pathworks = true;
-                        }
+                    pathworks = true;
+                } //if they're not then we have to check what tiles are in between them
+                else if (y1 - y2 > 1)
+                {
+                    
+                    for (var y = y2 + 1; y < y1; y++) {
+                            if (tilesAtPos[x1, y] == null)
+                            {
+                                pathworks = true;
+                            }
                     }
                 }
-            }
-            else if (y2 - y1 > 1)
-            {
+                else if (y2 - y1 > 1)
                 {
-                    for (var y = y1 + 1; y < y2; y++)
-                    {
-                        if (tilesAtPos[x1, y] == null)
+                        for (var y = y1 + 1; y < y2; y++)
                         {
-                            pathworks = true;
+                            if (tilesAtPos[x1, y] == null)
+                            {
+                                pathworks = true;
+                            }
                         }
-                    }
+           
                 }
-            }
-        }
-        else if (y1 == y2)
-        { Debug.Log("samey");
-            if (x1 - x2 == 1 || x1 - x2 == -1)
-            {
-                pathworks = true;
-            }
-            else if (x1 - x2 > 1)
-            {
+            } else if (y1 == y2)
+            { 
+                Debug.Log("samey");
+                if (x1 - x2 == 1 || x1 - x2 == -1)
+                {
+                    pathworks = true;
+                }
+                else if (x1 - x2 > 1)
                 {
                     for (var x = x2 + 1; x < y1; x++)
                     {
-                        if (tilesAtPos[x, y1] == null)
-                        {
-                            pathworks = true;
-                        }
+                            if (tilesAtPos[x, y1] == null)
+                            {
+                                pathworks = true;
+                            }
                     }
                 }
-            }
-            else if (x2 - x1 > 1)
-            {
+                else if (x2 - x1 > 1)
                 {
                     for (var x = x1 + 1; x < x2; x++)
                     {
-                        if (tilesAtPos[x, y1] == null)
-                        {
-                            pathworks = true;
-                        }
+                            if (tilesAtPos[x, y1] == null)
+                            {
+                                pathworks = true;
+                            }
                     }
                 }
             }
-        }
-        
-        if (pathworks == true)
-        {
-            tilesAtPos[x1, y1] = null;
-            tilesAtPos[x2, y2] = null;
-            PathWorking(selected1,selected2);
-        }
+            
+            if (pathworks == true)
+            {
+                tilesAtPos[x1, y1] = null;
+                tilesAtPos[x2, y2] = null;
+                Debug.Log(tilesAtPos[x1, y1]);
+                PathWorking(selected1,selected2);
+            }
 
-        pathworks = false;
+            pathworks = false;
+        
+        
+    
     }
 
     void PathWorking(GameObject tile1, GameObject tile2)
     {
         _ResourceDictionary.GetResource(selected1);
+
         Destroy(selected1);
         Destroy(selected2);
+        
+        tile1 = null;
+        tile2 = null;
     }
     
     
     
     
-    }
+}
 
 
 
