@@ -6,7 +6,8 @@ using Random = UnityEngine.Random;
 
 public class Array2D : MonoBehaviour
 {
-
+    private bool resourceUpdate = false;
+    
     //This script is to generate the grid
     //top left corner is -8.88, 4.92, for offset
 
@@ -46,12 +47,15 @@ public class Array2D : MonoBehaviour
 
 
     public ResourceDictionary _ResourceDictionary;
+
+    private LineRenderer lineR;
     
     void Start()
     {
         //Since we need random tile layouts in this game, this is the random seed
         //It is very unlikely you'd 
         Random.InitState(System.DateTime.Now.Second * System.DateTime.Now.Millisecond);
+        lineR = this.gameObject.GetComponent<LineRenderer>();
         MakeGrid();
         
         
@@ -285,18 +289,32 @@ public class Array2D : MonoBehaviour
 
     void PathWorking(GameObject tile1, GameObject tile2)
     {
-        _ResourceDictionary.GetResource(selected1);
 
-        Destroy(selected1);
-        Destroy(selected2);
+        if (resourceUpdate == false)
+        {
+            _ResourceDictionary.GetResource(selected1);
+            resourceUpdate = true;
+        }
+
+        lineR.SetPosition(0, tile1.transform.position);
+        lineR.SetPosition(1, tile2.transform.position);
         
+       Invoke("destroyTiles", 0.2f);
+        
+
+       
         tile1 = null;
         tile2 = null;
     }
-    
-    
-    
-    
+
+    private void destroyTiles()
+    {
+        lineR.SetPosition(0, Vector3.zero);
+        lineR.SetPosition(1, Vector3.zero);
+        Destroy(selected1);
+        Destroy(selected2);
+        resourceUpdate = false;
+    }
 }
 
 
