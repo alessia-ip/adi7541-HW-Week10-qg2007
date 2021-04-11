@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 927b925eaeb2f6248a58d7cf020b1497
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - greenTile: {fileID: 8016310628586143882, guid: 7f0442769b3316340b0029e2e5aa7cdc,
+      type: 3}
+  - tile1: {fileID: 6480866199892468443, guid: 86da1aec2c1321c44be52b3cef526fe9, type: 3}
+  - tile2: {fileID: 3158159080585881459, guid: 5fed6d00abc96b0488f834860e0d4fcd, type: 3}
+  - tile3: {fileID: 7100603517043589407, guid: 938457ab78011c040825bc9b5cda9105, type: 3}
+  - tile4: {fileID: 2778350629966236330, guid: d4906ef30286f4e4abf330872080c98c, type: 3}
+  - tile5: {fileID: 6723010100079104841, guid: f71a68ae06859f9428ab2dd1668a30f3, type: 3}
+  - cam: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
