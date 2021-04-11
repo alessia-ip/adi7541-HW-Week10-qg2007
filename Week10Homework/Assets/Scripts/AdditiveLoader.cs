@@ -11,5 +11,6 @@ public class AdditiveLoader : MonoBehaviour
     void Start()
     {
         SceneManager.LoadScene(1, LoadSceneMode.Additive); //load the UI reset scene
+        SceneManager.LoadScene(2, LoadSceneMode.Additive); //load the UI reset scene
     }
 }

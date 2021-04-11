@@ -162,15 +162,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 377509984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f2d8aed726e40a6964890194f5415b, type: 3}
+  m_Script: {fileID: 11500000, guid: 927b925eaeb2f6248a58d7cf020b1497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 6
-  width: 12
-  greenTile: {fileID: 6723010100079104841, guid: f71a68ae06859f9428ab2dd1668a30f3,
+  height: 5
+  width: 5
+  clayTile: {fileID: 7100603517043589407, guid: 938457ab78011c040825bc9b5cda9105,
+    type: 3}
+  lavaTile: {fileID: 6480866199892468443, guid: 86da1aec2c1321c44be52b3cef526fe9,
+    type: 3}
+  obsidianTile: {fileID: 3158159080585881459, guid: 5fed6d00abc96b0488f834860e0d4fcd,
+    type: 3}
+  sandTile: {fileID: 2778350629966236330, guid: d4906ef30286f4e4abf330872080c98c,
+    type: 3}
+  waterTile: {fileID: 6723010100079104841, guid: f71a68ae06859f9428ab2dd1668a30f3,
     type: 3}
   cam: {fileID: 1301626250}
   level: {fileID: 0}
+  _ResourceDictionary: {fileID: 0}
 --- !u!114 &377509987
 MonoBehaviour:
   m_ObjectHideFlags: 0
