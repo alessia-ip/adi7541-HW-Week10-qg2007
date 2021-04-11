@@ -42,7 +42,8 @@ public class Array2D_3 : MonoBehaviour
     private GameObject selected1 = null;
     private GameObject selected2 = null;
 
-
+    public GameObject level;
+    
     void Start()
     {
         //Since we need random tile layouts in this game, this is the random seed
@@ -88,8 +89,16 @@ public class Array2D_3 : MonoBehaviour
         }
     }
     
-    void MakeGrid()
+   public void MakeGrid()
     { 
+        
+        if (level != null)
+        {
+            Destroy(level);
+        }
+
+        level = new GameObject("Level");
+        
         //set grid positions
         tilePlaces = new Vector2[width, height];
         for (int x = 0; x < width; x++)
@@ -120,8 +129,10 @@ public class Array2D_3 : MonoBehaviour
                 var newTile = Instantiate(thisTile);
                 //we move the tile to the correct position
                 newTile.transform.position = tilePlaces[x, y];
+                newTile.transform.parent = level.transform;
                 //then we assign it to our tiles 2D array
                 tilesAtPos[x, y] = newTile;
+                
             }
         }
     }
