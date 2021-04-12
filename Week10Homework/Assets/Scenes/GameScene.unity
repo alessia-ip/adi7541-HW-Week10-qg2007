@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 5
-  width: 5
+  width: 10
   clayTile: {fileID: 7100603517043589407, guid: 938457ab78011c040825bc9b5cda9105,
     type: 3}
   lavaTile: {fileID: 6480866199892468443, guid: 86da1aec2c1321c44be52b3cef526fe9,
