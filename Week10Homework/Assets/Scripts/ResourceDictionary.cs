@@ -48,6 +48,10 @@ public class ResourceDictionary : MonoBehaviour
     public float vertical = 4.6f; // height of the resource displays
     public float horizontal = -3f;
 
+
+    private int metalOwned = 0;
+    public Text metalText;
+    
     void Start()
     {
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
@@ -183,4 +187,26 @@ public class ResourceDictionary : MonoBehaviour
         //We don't need to update the Ui every frame
         DisplayResources();
     }
+
+    public void RefineResources()
+    {
+        if (resourcesOwned["lava"] > 0 &&
+            resourcesOwned["clay"] > 0 &&
+            resourcesOwned["water"] > 0 &&
+            resourcesOwned["obsidian"] > 0 &&
+            resourcesOwned["clay"] > 0)
+        {
+            AddResource("water", -1);
+            AddResource("clay", -1);
+            AddResource("obsidian", -1);
+            AddResource("lava", -1);
+            AddResource("sand", -1);
+
+            metalOwned++;
+            metalText.text = metalOwned + " piece of metal owned";
+            
+            DisplayResources();
+        }
+    }
+    
 }
