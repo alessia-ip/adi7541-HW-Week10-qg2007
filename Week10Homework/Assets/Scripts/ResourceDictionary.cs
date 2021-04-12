@@ -73,6 +73,7 @@ public class ResourceDictionary : MonoBehaviour
     
     
     //Yanxi: Call this to spawn the resource objects
+    //Alessia: I don't think we need this?
     /*
     private IEnumerator SpawnResource(GameObject resource, Vector2 position) {
         Instantiate(resource);
@@ -100,6 +101,7 @@ public class ResourceDictionary : MonoBehaviour
     //Yanxi: Display resources Icons
     void DisplayIcons()
     {
+        //each of these puts the right icons in the right spots. 
         var cIcon = Instantiate(clayIcon);
         cIcon.transform.position = new Vector2 (ResourceDisplayPostion.x + horizontal, ResourceDisplayPostion.y + vertical);
         
@@ -119,6 +121,9 @@ public class ResourceDictionary : MonoBehaviour
     //Yanxi: Display resources numbers that has gained
     public void DisplayResources()
     { 
+        //we show all the resources 
+        //this should probably be a switch statement
+        //this is updating the UI
         if (resourcesOwned.ContainsKey("clay"))
         {
             displayClay.text = resourcesOwned["clay"].ToString();
@@ -145,41 +150,37 @@ public class ResourceDictionary : MonoBehaviour
     public void GetResource(GameObject tile)
     {
         var type = CheckType(tile);
+        //we check what type of resource we're adding 
         
         if (type == TileInformation.TileResource.clay)
         {
-            //StartCoroutine (SpawnResource(clayResource, tile.transform.position));
             AddResource("clay", 1);
         }
         
         if (type == TileInformation.TileResource.lava)
         {
-            //StartCoroutine (SpawnResource(lavaResource, tile.transform.position));
             AddResource("lava", 1);
         }
         
         if (type == TileInformation.TileResource.obsidian)
         {
-            //StartCoroutine (SpawnResource(obsidianResource, tile.transform.position));
             AddResource("obsidian", 1);
         }
         
         if (type == TileInformation.TileResource.sand)
         {
-            //StartCoroutine (SpawnResource(sandResource, tile.transform.position));
             AddResource("sand", 1);
         }
         
         if (type == TileInformation.TileResource.water)
         {
-            //StartCoroutine (SpawnResource(waterResource, tile.transform.position));
             AddResource("water", 1);
-            
         }
         
         Debug.Log("Added a resource of type: " + type);
         //Yanxi: Display resources
         //Alessia: this only needs to be called if you're updating the number of resources you have
+        //We don't need to update the Ui every frame
         DisplayResources();
     }
 }

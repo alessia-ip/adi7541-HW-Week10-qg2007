@@ -153,7 +153,7 @@ public class Array2D : MonoBehaviour
 
     void TileClicked(GameObject tile1, GameObject tile2)
     {
-        
+        //we want to check both tile types here so we can compare later if they're the same
         var resourceType1 = tile1.GetComponent<TileInformation>().resourceType;
         var resourceType2 = tile2.GetComponent<TileInformation>().resourceType;
 
@@ -161,8 +161,9 @@ public class Array2D : MonoBehaviour
     
     void StartRandomTile()
     {
+        //we want different types of tiles in the scene
+        //this makes sure they are randomly 
         int r = Random.Range(1,6);
-        //Debug.Log("random seed" + r);
         switch (r)
         {
             case 1:
@@ -185,10 +186,12 @@ public class Array2D : MonoBehaviour
         }
     }
 
+    //here we are comparing the tiles selected
     void compareTiles(GameObject tile1, GameObject tile2)
     {
         var resourceType1 = tile1.GetComponent<TileInformation>().resourceType;
         var resourceType2 = tile2.GetComponent<TileInformation>().resourceType;
+        //if they have the same resource type, then we go on to compare their location
         if (resourceType1 == resourceType2)
         {
             LocationIn2dArray(selected1,selected2);
@@ -197,6 +200,7 @@ public class Array2D : MonoBehaviour
 
     void LocationIn2dArray(GameObject tile1, GameObject tile2)
     {
+        //we get, from each tile, their x and y index in the array
         int xin2darray1 = tile1.GetComponent<TileInformation>().indexX;
         int yin2darray1 = tile1.GetComponent<TileInformation>().indexY;
         int xin2darray2 = tile2.GetComponent<TileInformation>().indexX;
@@ -204,6 +208,7 @@ public class Array2D : MonoBehaviour
         
         Debug.Log("Tile one is at: " + xin2darray1  + "," + yin2darray1+"\n Tile two is at: " + xin2darray2 + "," + yin2darray2);
         
+        //then we check the path between them to see if it's a good / free path
         CheckPath(xin2darray1,yin2darray1,xin2darray2,yin2darray2);
     }
 
@@ -227,8 +232,8 @@ public class Array2D : MonoBehaviour
                 {
                     
                     for (var y = y2 + 1; y < y1; y++) {
-                            if (tilesAtPos[x1, y] == null)
-                            {
+                            if (tilesAtPos[x1, y] == null) //if the tiles between them are ALSO all empty, the path is also true
+                            { //since we are able to make a straight, uninterrupted line between them
                                 pathworks = true;
                             }
                     }
@@ -244,9 +249,9 @@ public class Array2D : MonoBehaviour
                         }
            
                 }
-            } else if (y1 == y2)
+            } else if (y1 == y2) //same as above, but on the Y if they aren't in the same row
             { 
-                Debug.Log("samey");
+                Debug.Log("sameY");
                 if (x1 - x2 == 1 || x1 - x2 == -1)
                 {
                     pathworks = true;
@@ -273,11 +278,14 @@ public class Array2D : MonoBehaviour
                 }
             }
             
+            //if the path does end up being valid we can keep going
             if (pathworks == true)
             {
+                //we are getting rid of those tiles, so we set both of them to null in the array
                 tilesAtPos[x1, y1] = null;
                 tilesAtPos[x2, y2] = null;
                 Debug.Log(tilesAtPos[x1, y1]);
+                //then we can carry out this function
                 PathWorking(selected1,selected2);
             }
 
@@ -290,29 +298,34 @@ public class Array2D : MonoBehaviour
     void PathWorking(GameObject tile1, GameObject tile2)
     {
 
+        //if we haven't already updated the resources, do it here, ONCE
         if (resourceUpdate == false)
         {
             _ResourceDictionary.GetResource(selected1);
             resourceUpdate = true;
         }
 
+        //here we set the line renderer to draw a line between the positions of the two tiles
         lineR.SetPosition(0, tile1.transform.position);
         lineR.SetPosition(1, tile2.transform.position);
         
+        //then we destroy them, 0.2 seconds later
        Invoke("destroyTiles", 0.2f);
         
-
-       
+       //then we set them to null
         tile1 = null;
         tile2 = null;
     }
 
     private void destroyTiles()
     {
+        //when we destroy the tiles, we no longer want to see the line
         lineR.SetPosition(0, Vector3.zero);
         lineR.SetPosition(1, Vector3.zero);
+        //then we destroy the tiles in the scene
         Destroy(selected1);
         Destroy(selected2);
+        //then we make sure we can update the resources again
         resourceUpdate = false;
     }
 }
